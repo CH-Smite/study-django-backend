@@ -12,12 +12,12 @@ def index(request):
         }
     )
 
-def single_post_page(request, pk):
+def post_detail(request, pk):
     post = Post.objects.get(pk=pk)
 
     return render(
         request,
-        "blog/single_post_page.html",
+        "blog/post_detail.html",
         {
             "post":post,
         }
