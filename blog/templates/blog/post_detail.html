@@ -11,6 +11,7 @@
         <link rel="stylesheet" href="{% static "blog/bootstrap/bootstrap.min.css" %}" media="screen" />
         <!-- Core theme CSS (includes Bootstrap)-->
         <link rel="stylesheet" href="{% static "blog/css/styles.css" %}" media="screen" />
+        <link href="https://fonts.googleapis.com/icon?family=Material+Symbols+Outlined|Material+Icons+Sharp" rel="stylesheet">
     </head>
     <body>
         <!-- Responsive navbar-->
@@ -54,7 +55,22 @@
                         <p>{{ post.content }}</p>
 
                         {% if post.file_upload %}
-                            <a href="{{ post.file_upload.url }}" class="btn btn-outline-dark" role="botton">Download</a>
+                            <a href="{{ post.file_upload.url }}" class="btn btn-outline-dark" role="botton">Download:
+                            {% if post.get_file_ext == "csv" %}
+                                <img src="{% static "blog/icon/article.png" %}">
+                            {% elif post.get_file_ext == "xlsx" or post.get_file_ext == "xls" %}
+                                <img src="{% static "blog/icon/assignment.png" %}">
+                            {% elif post.get_file_ext == "docx" or post.get_file_ext == "doc" or post.get_file_ext == "txt" or post.get_file_ext == "hwp" or post.get_file_ext == "hwpx"%}
+                                <img src="{% static "blog/icon/description.png" %}">
+                            {% elif post.get_file_ext == "zip" or post.get_file_ext == "7z" or post.get_file_ext == "rar" or post.get_file_ext == "alz" %}
+                                <img src="{% static "blog/icon/folder_zip.png" %}">
+                            {% elif post.get_file_ext == "pdf" %}
+                                <img src="{% static "blog/icon/pdf.png" %}">
+                            {% else %}
+                                <img src="{% static "blog/icon/draft.png" %}">
+                            {% endif %}
+                                {{ post.get_file_name }}
+                            </a>
                         {% endif %}
 
                     </article>
