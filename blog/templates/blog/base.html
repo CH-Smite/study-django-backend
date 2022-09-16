@@ -3,7 +3,7 @@
 <html lang="ko">
 <head>
     <meta charset="UTF-8">
-    <title>Blog</title>
+    <title>{% block head_title %}Blog{% endblock %}</title>
     <link rel="stylesheet" href="{% static "blog/bootstrap/bootstrap.min.css" %}" media="screen">
 </head>
 <body>
@@ -21,6 +21,7 @@
                 </div>
             </div>
         </nav>
+
         <!-- 헤더 컨테이너 -->
 {% comment %}
         <header class="py-5 bg-light border-bottom mb-4">
@@ -44,8 +45,6 @@
                 </div>
 
                 <div class="col-md-4 col-lg-3">
-
-
 
 </body>
 </html>
