@@ -25,7 +25,7 @@
                                 <a class="btn btn-primary" href="{{ p.get_absolute_url }}">Read more →</a>
                                 <div class="card-footer text-muted">
                                     Posted on {{ p.created_at }} by
-                                    <a href="#">작성자 명</a>
+                                    <a href="#">{{ p.author | upper }}</a>
                                 </div>
                             </div>
                         </div>
