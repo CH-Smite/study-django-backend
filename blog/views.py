@@ -1,6 +1,6 @@
 from django.shortcuts import render
 from django.views.generic import ListView, DetailView
-from . models import Post, Category
+from . models import Post, Category, Tag
 # Create your views here.
 """
 def index(request):
@@ -38,6 +38,13 @@ class PostList(ListView):
         context["no_category_post_count"] = Post.objects.filter(category=None).count()
         return context
 
+class PostDetail(DetailView):
+    model = Post
+    def get_context_data(self, **kwargs):
+        context = super(PostDetail, self).get_context_data()
+        context["categories"] = Category.objects.all()
+        context["no_category_post_count"] = Post.objects.filter(category=None).count()
+        return context
 
 def category_page(request, slug):
     if slug == "no_category":
@@ -58,11 +65,18 @@ def category_page(request, slug):
         }
     )
 
+def tag_page(requset, slug):
+    tag = Tag.objects.get(slug=slug)
+    post_list = tag.post_set.all()
 
-class PostDetail(DetailView):
-    model = Post
-    def get_context_data(self, **kwargs):
-        context = super(PostDetail, self).get_context_data()
-        context["categories"] = Category.objects.all()
-        context["no_category_post_count"] = Post.objects.filter(category=None).count()
-        return context
+    return render(
+        requset,
+        "blog/index.html",
+        {
+            "post_list": post_list,
+            "tag": tag,
+            "categories": Category.objects.all(),
+            "no_category_post_count": Post.objects.filter(category=None).count(),
+        }
+    )
+
