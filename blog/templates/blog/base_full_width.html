@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="ko">
+
+<head>
+    <title>{% block head_title %}Blog{% endblock %}</title>
+    <link rel="stylesheet" href="{% static "blog/bootstrap/bootstrap.min.css" %}" media="screen">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"/>
+    <meta name="description" content=""/>
+    <meta name="author" content=""/>
+    <title>{{ post.title }} - Blog</title>
+    <!-- Bootstrap core CSS-->
+    <link rel="stylesheet" href="{% static "blog/bootstrap/bootstrap.min.css" %}" media="screen"/>
+    <!-- Core theme CSS (includes Bootstrap)-->
+    <link rel="stylesheet" href="{% static "blog/css/styles.css" %}" media="screen"/>
+    <link href="https://fonts.googleapis.com/icon?family=Material+Symbols+Outlined|Material+Icons+Sharp"
+          rel="stylesheet">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.4/css/all.css"
+          integrity="sha384-DyZ88mC6Up2uqS4h/KRgHuoeGwBcD4Ng9SiP4dIRy0EXTlnuz47vAwmeGwVChigm" crossorigin="anonymous"/>
+</head>
+
+<body>
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <div class="container">
+        <a class="navbar-brand" href="/">Python Django</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
+                aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"><span
+                class="navbar-toggler-icon"></span></button>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+                <li class="nav-item"><a class="nav-link" href="/">Home</a></li>
+                <li class="nav-item"><a class="nav-link" href="/blog/">Blog</a></li>
+                <li class="nav-item"><a class="nav-link" href=".about_me/">About Me</a></li>
+                <li class="nav-item"><a class="nav-link active" aria-current="page" href="#">Contact Us</a></li>
+            </ul>
+        </div>
+    </div>
+</nav>
+
+<!-- 헤더 컨테이너 -->
+{% comment %}
+        <header class="py-5 bg-light border-bottom mb-4">
+            <div class="container">
+                <div class="text-center my-5">
+                    <h1 class="fw-bolder">Welcome to Blog Home!</h1>
+                    <p class="lead mb-0">A Bootstrap 5 starter layout for your next blog homepage</p>
+                </div>
+            </div>
+        </header>
+{% endcomment %}
+<!-- Page content-->
+<div class="container my-3">
+    <div class="row">
+        <div class="col-12" id="main-area">
+{% block main_area %}
+{% endblock %}
+        </div>
+    </div>
+</div>
+{% include "blog/footer.html" %}
+<!-- Bootstrap core JS-->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
+<!-- Core theme JS-->
+<script src="{% static "blog/js/scripts.js" %}"></script>
+</body>
+</html>
