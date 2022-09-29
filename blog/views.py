@@ -142,15 +142,15 @@ class PostUpdate(LoginRequiredMixin, UpdateView):
 
         return response
 
-    def dispatch(self, requset, *args, **kwargs):
-        if request.user.is_authenticated and requset.user == self.get_object().author:
+    def dispatch(self, request, *args, **kwargs):
+        if request.user.is_authenticated and request.user == self.get_object().author:
             return super(PostUpdate, self).dispatch(request, *args, **kwargs)
         else:
             raise PermissionDenied
 
     def get_context_data(self, **kwargs):
         context = super(PostUpdate, self).get_context_data()
-        if self.object.tags.exists()
+        if self.object.tags.exists():
             tags_str_list = list()
             for t in self.object.tags.all():
                 tags_str_list.append(t.name)
