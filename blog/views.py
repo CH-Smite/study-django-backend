@@ -12,7 +12,7 @@ def index(request):
 
     return render(
         request,
-        "blog/index.html",
+        "blog/post_list.html",
         {
             "posts": posts,
         }
@@ -35,7 +35,8 @@ def post_detail(request, pk):
 class PostList(ListView):
     model = Post
     ordering = "-pk"
-    template_name = "blog/index.html"
+    paginate_by = 5
+
     def get_context_data(self, **kwargs):
         context = super(PostList, self).get_context_data()
         context["categories"] = Category.objects.all()
@@ -61,7 +62,7 @@ def category_page(request, slug):
 
     return render(
         request,
-        "blog/index.html",
+        "blog/post_list.html",
         {
             "post_list": post_list,
             "categories": Category.objects.all(),
@@ -76,7 +77,7 @@ def tag_page(requset, slug):
 
     return render(
         requset,
-        "blog/index.html",
+        "blog/post_list.html",
         {
             "post_list": post_list,
             "tag": tag,
@@ -198,3 +199,4 @@ def delete_comment(request, pk):
         return redirect(post.get_absolute_url())
     else:
         raise PermissionDenied
+
