@@ -5,6 +5,7 @@ from .models import Post, Category, Tag, Comment
 from .forms import CommentForm
 from django.core.exceptions import PermissionDenied
 from django.utils.text import slugify
+from django.db.models import Q
 # Create your views here.
 """
 def index(request):
@@ -200,3 +201,18 @@ def delete_comment(request, pk):
     else:
         raise PermissionDenied
 
+class PostSearch(PostList):
+    paginate_by = None
+
+    def get_queryset(self):
+        keyword = self.kwargs["keyword"]
+        post_list = Post.objects.filter(
+            Q(title__contains=keyword) | Q(tags__name__contains=keyword)
+        ).distinct()
+        return post_list
+
+    def get_context_data(self, **kwargs):
+        context = super(PostSearch, self).get_context_data()
+        keyword = self.kwargs["keyword"]
+        context["search_info"] = f"Search: {keyword} ({self.get_queryset().count()})"
+        return context

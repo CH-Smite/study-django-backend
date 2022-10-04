@@ -1,7 +1,7 @@
 <style>
-a {
-  text-decoration: none;
-}
+    a {
+        text-decoration: none;
+    }
 </style>
 <!-- Side widgets-->
 <div class="col-lg-4">
@@ -10,9 +10,9 @@ a {
         <div class="card-header">Search</div>
         <div class="card-body">
             <div class="input-group">
-                <input class="form-control" type="text" placeholder="Enter search term..."
-                       aria-label="Enter search term..." aria-describedby="button-search"/>
-                <button class="btn btn-primary" id="button-search" type="button">Go!</button>
+                <input class="form-control" type="text" placeholder="Enter search term..." id="search-input"
+                       aria-label="검색 입력창"/>
+                <button class="btn btn-primary" id="search-input" type="button" onclick="searchPost();">Go!</button>
             </div>
         </div>
     </div>
@@ -21,16 +21,17 @@ a {
         <h5 class="card-header">Categories</h5>
         <div class="card-body">
             <div class="row">
-            <oi>
-                <ul>
-                    {% for category in categories %}
-                        <li>
-                            <a href="{{ category.get_absolute_url }}">{{ category }} ({{ category.post_set.count }})</a>
-                        </li>
-                    {% endfor %}
-                    <li><a href="/blog/category/no_category/">미분류 ({{ no_category_post_count }})</a></li>
-                </ul>
-            </oi>
+                <oi>
+                    <ul>
+                        {% for category in categories %}
+                            <li>
+                                <a href="{{ category.get_absolute_url }}">{{ category }}
+                                    ({{ category.post_set.count }})</a>
+                            </li>
+                        {% endfor %}
+                        <li><a href="/blog/category/no_category/">미분류 ({{ no_category_post_count }})</a></li>
+                    </ul>
+                </oi>
             </div>
         </div>
     </div>
@@ -44,3 +45,4 @@ a {
 </div>
 </div>
 </div>
+
