@@ -44,6 +44,12 @@ class Post(models.Model):
 
     tags = models.ManyToManyField(Tag, blank=True)
 
+    def get_avatar_url(self):
+        if self.author.socialaccount_set.exists():
+            return self.author.socialaccount_set.first().get_avatar_url()
+        else:
+            return f"https://doitdjango.com/avatar/id/1301/2dc6eaa41269bc71/svg/{self.author.email}"
+
 
 
     def __str__(self):
